@@ -84,11 +84,25 @@
 
 ### The third pass -> 논문 심화 디테일 부분
 
-* 증명 (자세히 보아야 이쁘다.)
-* 다시 한번 구현 해보는 과정
-virtually re-implement
+* 재구축 (자세히 보아야 이쁘다.)(대략 5시간 정도)
+
+* 전략
+    * 가정부터 실험까지 한 문장도 빠짐없이 읽어보며 virtually re-implement 한다.
+
+* 그 외
+    * 
 
 
 
 
-이 방식으로 연습해볼겸, CNN논문을 읽어보고 정리해 보았습니다.
+## LITERATURE SURVEY
+
+
+
+### 
+1. google scolar 들어가서 최근 논문에서 자주 사용되는 키워드 찾기.(최근 survey paper를 찾으면 좋다.)(first pass reading)
+2. 반복적으로 나오는 인용과 저자 찾기.(주요 논문과 연구진을 찾고, 그들의 최신 논문을 보자.)
+3. top 컨퍼런스 사이트로 가서 연구 현황을 보기.(second pass reading)
+
+
+
