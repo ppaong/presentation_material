@@ -12,6 +12,48 @@
 
 
 
+# 파이썬 기초실습
+
+### 기억해둘 코드
+* OOP 관련
+  * ```
+    instance.method(~~~)
+    class.method(instance,~~~)
+    # 같은 코드
+
+    isinstance(instance,class)
+    # class의 instance인지 확인
+
+    def f(x):
+       ~~
+
+    def g(f,e):
+       return f(f(e))
+    # 함수 인자
+
+    
+    ```
+* 예외 처리 코드
+  * ```
+    try:
+       #여기서 raise ~~Error("메시지")
+    except:
+       #예외처리
+    ```
+* 유용한 접근 연산(array indexing)
+  * ```
+    #A는 bool np.array
+    #B는 np.array
+    B[A] # A[i]==true 인 것만 반환
+
+    #A는 int np.array
+    #B는 np.array
+    B[A] # B[A] 합성함수처럼 작용 
+    ```
+ 
+### 그 외
+* "가능하면 numpy 메소드를 사용."
+
 
 
 
@@ -29,7 +71,6 @@ https://pages.cs.wisc.edu/~akella/CS740/S12/740-Papers/paper-reading-keshav.pdf
 
 
 ### The first pass -> 일반적인 아이디어 부분
-
 * 빠른 스캔 (birds-eye view? 라는거 같습니다.)(대략 5~10분 정도)
 
 * 전략
@@ -54,7 +95,6 @@ https://pages.cs.wisc.edu/~akella/CS740/S12/740-Papers/paper-reading-keshav.pdf
 
 
 ### The second pass -> 논문 내용 이해 부분
-
 * 본문 읽기 (key point나 생각을 적어두는게 유용할 수 있다.)(대략 1시간 정도)
 
 * 전략
@@ -75,8 +115,7 @@ https://pages.cs.wisc.edu/~akella/CS740/S12/740-Papers/paper-reading-keshav.pdf
 
 
 ### The third pass -> 논문 심화 디테일 부분
-
-* 재구축 (자세히 보아야 이쁘다. 논문도 그렇다.)(대략 5시간 정도)
+* 재구축 (자세히 보아야 이쁘다.)(대략 5시간 정도)
 
 * 전략
     * 가정부터 실험까지 한 문장도 빠짐없이 읽어보며 virtually re-implement 한다.(같은 가정을 세우고, 논문의 내용을 다시 구현하고 증명해봅니다.)
@@ -103,7 +142,6 @@ https://pages.cs.wisc.edu/~akella/CS740/S12/740-Papers/paper-reading-keshav.pdf
 
 
 ## 그 밖의 팁
-
 * "논문을 효율적으로 읽어라."
 * "전체를 알기 전에 디테일에 집착하지 마라."
 
