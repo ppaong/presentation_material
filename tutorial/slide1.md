@@ -20,23 +20,23 @@
     instance.method(~~~)
     class.method(instance,~~~)
     # 같은 코드
-
+    ```
+  * ```
     isinstance(instance,class)
     # class의 instance인지 확인
-
+    ```
+  * ```
     def f(x):
        ~~
 
     def g(f,e):
        return f(f(e))
     # 함수 인자
-
-    
     ```
 * 예외 처리 코드
   * ```
     try:
-       #여기서 raise ~~Error("메시지")
+       #여기서 raise ~~Error("메시지") 호출
     except:
        #예외처리
     ```
