@@ -20,7 +20,7 @@ https://pages.cs.wisc.edu/~akella/CS740/S12/740-Papers/paper-reading-keshav.pdf
 
 본문에서는 논문을 효율적으로 읽는게 중요하다고 강조하며 THETHREE-PASSAPPROACH 방식을 사용할것을 제안했습니다.
 
-또한 
+또한 문헌조사 방법과 몇 가지 논문 읽는 팁을 제공했습니다.
 
 
 
@@ -95,14 +95,15 @@ https://pages.cs.wisc.edu/~akella/CS740/S12/740-Papers/paper-reading-keshav.pdf
 
 
 
-### 
+### 문헌조사
 1. google scolar 들어가서 최근 논문에서 자주 사용되는 키워드 찾기.(최근 survey paper를 찾으면 좋다.)(first pass reading)
 2. 반복적으로 나오는 인용과 저자 찾기.(주요 논문과 연구진을 찾고, 그들의 최신 논문을 보자.)
 3. top 컨퍼런스 사이트로 가서 연구 현황을 보기.(second pass reading)
 
 
 
-### 그 밖의 팁
+## 그 밖의 팁
+
 * "논문을 효율적으로 읽어라."
 * "전체를 알기 전에 디테일에 집착하지 마라."
 
