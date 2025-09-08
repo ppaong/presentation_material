@@ -48,9 +48,21 @@
 
     #A는 int np.array
     #B는 np.array
-    B[A] # B[A] 합성함수처럼 작용 
+    B[A] # <=> B[A[i]] 합성함수처럼 작용
+
+    #X,Y는 int np.array
+    #C는 np.array (n,n) \in R^2
+    C[X,Y] # <=> C[X[i],Y[i]]
     ```
- 
+* 유용한 논리 연산
+  * ```
+    #A는 int np.array
+    A>1 # 부등식 같은 조건문은 A의 각 원소에 독립적으로 조건을 적용한 결과값을 bool np.array를 반환
+    
+    #L은 bool np.array
+    np.any(L) # L의 전체 원소에 or 연산 (for any i, L[i] is true)
+    np.all(L) # L의 전체 원소에 and 연산 (for all i, L[i] is true)
+    ```
 ### 그 외
 * "가능하면 numpy 메소드를 사용."
 
