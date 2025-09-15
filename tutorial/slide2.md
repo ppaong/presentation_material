@@ -15,7 +15,7 @@ $I_n$ : la.eye(n)
 
 ### Inverse
 
-$A^-1$ : la.inv(A)   
+$A^{-1}$ : la.inv(A)   
 $A^+$ : la.pinv(A) *(n*m 행렬 A의 pseudo inverse)
 
 
