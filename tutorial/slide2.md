@@ -9,7 +9,7 @@ lecture 4,5 완료
 
 
 ## numpy.linalg as la
-numpy는 행렬을 다루기 편하도록 여러 선형대수학의 함수들을 지원한다.
+numpy는 행렬을 다루기 편하도록 여러 선형대수학의 함수들을 지원
 
 
 ### 단위행렬
@@ -23,7 +23,7 @@ $A^+$ : la.pinv(A)  (m*n 행렬 A의 pseudo inverse)
 
 
 ### Cholesky factorication
-> LU분해인데 positive definite에서 특이한 경우 빠른 분해가 가능하다.
+> LU분해인데 positive definite에서 특이한 경우 빠른 분해가 가능
 
 $A=LL^T$ : L = la.cholesky(A)
 
@@ -37,23 +37,22 @@ la.qr(A,mode='reduced') 하면 Q,R을 reduced form으로 반환
 
 
 ### Singular value decomposition (SVD)
-> $AV = U\Sigma$ 를 통해 생각해보면, 직교좌표계V를 A를 통해 선형변환 했을때, 직교성질이 유지되는 좌표계 U와 적절한 scaler Sigma를 찾아낼 수 있다고 해석할 수 있다. othogonal vector로 이루어진 행렬의 성질을 이용해 그러한 관계를 아래와 같이 한번에 나타낼수있다.
+> $AV = U\Sigma$ 를 통해 생각해보면, 직교좌표계V를 A를 통해 선형변환 했을때, 직교성질이 유지되는 좌표계 U와 적절한 scaler Sigma를 찾아낼 수 있다고 해석할 수 있다. othogonal vector로 이루어진 행렬의 성질을 이용해 그러한 관계를 아래와 같이 한번에 표현
 
 $A=U \Sigma V^T$ : U, S, V = la.svd(A)   
-기본적으로 full 형태의 행렬을 반한하며, la.svd(A,full_matrix=False)으 reduced SVD를 실행. (U의 column space의 차원이 낮은경우 가능하다.)
+기본적으로 full 형태의 행렬을 반한하며, la.svd(A,full_matrix=False)으 reduced SVD를 실행. (U의 column space의 차원이 낮은경우 가능)
 
 
 ### Eigen value decomposition (EVD)
-> 정방행렬 A에 대한 Eigen vector 의 성질 $Av_n = \lambda v_n$ 을 이용해  $AV=V\Lambda$ 형태를 A에 대해여 다음의 관계식으로 니티낼 수 있다.
+> 정방행렬 A에 대한 Eigen vector 의 성질 $Av_n = \lambda v_n$ 을 이용해  $AV=V\Lambda$ 형태를 A에 대해여 다음의 관계식으로 표현
 
 $A=V \Lambda V^{-1}$ : L,V = la.eig(A)   
 $A=V \Lambda V^T$ : L,V = la.eigh(A) *(대칭인 경우 더 빠른 분해)  
-eigen value 만 구하고싶은 경우 V = la.eigvals(A) 로 구할 수 있다.
+eigen value 만 구하고싶은 경우 V = la.eigvals(A)
 
 
 ### SVD와 EVD에서 중요한 성질
 구조적으로 중앙의 diagonal matrix를 두고 양쪽에 othogonal vector로 이루어진 martix가 곱해진 형태이다. 이는 중요한 성질을 내포한다.
-이는 행렬을 대각화 했다고 표현한다.
 
 나중에 PAC할때 이를 중심적으로 사용하는데, 데이터의 standard 좌표계보다 데이터를 더 잘 나타내는 직교좌표계를 찾는 기법이다.
 아에 공분산 행렬을 대각화 시켜서 주요 주성분을 나타내는 othogonal vector를 뽑아낼 수 있다. (정방행렬에 대칭이므로 EVD를 사용)
@@ -69,8 +68,8 @@ eigen value 만 구하고싶은 경우 V = la.eigvals(A) 로 구할 수 있다.
 > 보간법은 몇개의 주어진 점을 잘 연걸하는 선을 그리는 벙법이다.
 
 import scipy.interpolate as interp
-f = interp.interp1d(x,y,kind="zero") 를 통해 함수 선언을 할 수 있다. 
-attribute 중 kind 는 "linear", "cubic" 등 다양하게 지원한다.
+f = interp.interp1d(x,y,kind="zero") 를 통해 함수 선언 
+attribute 중 kind 는 "linear", "cubic" 등 다양하게 지원
 
 
 ### optimize
@@ -84,7 +83,7 @@ local 한 최소지점을 찾아간다. (전역적으로 최소는 아니다.)(�
 
 
 ### curve fitting
-> 주어진 함수f로 점을 가장 잘 표현하는
+> 주어진 함수f로 점을 가장 잘 표현하는 파라메터를 얻는다.
 
 def f(x,a,b):
   ~~a,b를 파라메터로 가지는 f(x|a,b) 로 정의
