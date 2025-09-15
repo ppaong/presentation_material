@@ -29,7 +29,7 @@ $A=LL^T$ : L = la.cholesky(A)
 
 
 ### QR decomposition
-> A의 column vector를 Gram_Schmidt process를 통해 othogonal vector를 얻어내어 다시 A를 나타내는 방식(Q:othogonal matrix)
+> A의 column vector를 Gram_Schmidt process를 통해 othogonal bases를 얻어내어 다시 A를 나타내는 방식(Q:othogonal matrix)
 
 $A=QR$ : la.qr(A)
 
