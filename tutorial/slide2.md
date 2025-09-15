@@ -119,9 +119,10 @@ linprog(c, A_ub=, b_ub=, A_eq=, b_eq=, bounds=(0, None))
 ### integration
 > 적분및 ode를 풀수있는 연산들을 제공
 
-$$ \frac{dy}{dt} = f(y,t) $$   
+$$ \frac{dy}{dt} = f(y,t) $$
+
 t = np.linspace(0,10,100)   
-Y = integ.odeint(f,[1,1],t)    (주어진 초기값 y=[1,1] 에 대해, 구간 t in [0,10] 에서 ode의 해 y를 구해서 반환합니다.)
+Y = integ.odeint(f,[1,1],t)    (주어진 초기값 y=[1,1] 에 대해, 구간 t in [0,10] 에서 ode의 해 y를 구해서 반환합니다.)    
 각종 물리문제에 접했을때 유용하게 쓸수있을 것 같습니다.
 
 
