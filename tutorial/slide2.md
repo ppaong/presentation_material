@@ -19,7 +19,7 @@ $I_n$ : la.eye(n)
 ### Inverse
 
 $A^{-1}$ : la.inv(A)   
-$A^+$ : la.pinv(A)  (n*m 행렬 A의 pseudo inverse)
+$A^+$ : la.pinv(A)  (m*n 행렬 A의 pseudo inverse)
 
 
 ### Cholesky factorication
