@@ -43,7 +43,7 @@ $A=U \Sigma V^T$ : U, S, V = la.svd(A)
 ### Eigen value decomposition (EVD)
 > 정방행렬 A에 대한 Eigen vector 의 성질 $Av_n = \lambda v_n$ 을 이용해  $AV=V\Lambda$ 형태를 A에 대해여 다음의 관계식으로 니티낼 수 있다.
 
-$A=V \Lambda V^-1$ : L,V = la.eig(A)   
+$A=V \Lambda V^{-1}$ : L,V = la.eig(A)   
 $A=V \Lambda V^T$ : L,V = la.eigh(A) *(대칭인 경우 더 빠른 분해)  
 eigen value 만 구하고싶은 경우 V = la.eigvals(A) 로 구할 수 있다.
 
