@@ -14,7 +14,7 @@ $I_n$ : la.eye(n)
 
 
 ### Singular value decomposition (SVD)
-> V의 직교좌표계를 A를 통해 선형변환 했을때, 직교성질이 유지되는 직교좌표계 U를 찾아낼 수 있다는 해석이 있다. othogonal vector로 이루어진 행렬의 성질을 이용해 그러한 관계를 아래와 같이 한번에 나타낼수있다.
+> $AV = U\Sigma$ 를 통해 생각해보면, 직교좌표계V를 A를 통해 선형변환 했을때, 직교성질이 유지되는 좌표계 U와 적절한 scaler Sigma를 찾아낼 수 있다고 해석할 수 있다. othogonal vector로 이루어진 행렬의 성질을 이용해 그러한 관계를 아래와 같이 한번에 나타낼수있다.
 
 $A=U \Sigma V^T$ : U, S, V = la.svd(A)   
 기본적으로 full 형태의 행렬을 반한하며, la.svd(A,full_matrix=False)으 reduced SVD를 실행. (U의 column space의 차원이 낮은경우 가능하다.)
@@ -25,7 +25,7 @@ $A=U \Sigma V^T$ : U, S, V = la.svd(A)
 
 $A=QR$ : la.qr(A)
 
-la.qr(A,mode='reduced') 하면 Q,R을 reduced for으로 반환
+la.qr(A,mode='reduced') 하면 Q,R을 reduced form으로 반환
 
 
 ### Cholesky factorication
@@ -35,7 +35,7 @@ $A=LL^T$ : L = la.cholesky(A)
 
 
 ### Eigen value decomposition
-> 
+> 행렬 A에 대한 Eigen vector 의 성질 $Av_n = \lambda v_n$ 을 이용해  $AV=V \Lambda V$ 형태를 A에 대해여 다음의 관계식으로 니티낼 수 있다.
 
 $A=V \Lambda V^-1$ : L,V = la.eig(A)   
 $A=V \Lambda V^T$ : L,V = la.eigh(A) *(대칭인 경우 더 빠른 분해)  
