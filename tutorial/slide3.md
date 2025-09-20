@@ -6,8 +6,9 @@
 5. ㅇ
 6. ㅇ
 
-완료
-하는겸 테스트로 VAE를 만들어보며 리뷰와 적용을 해봐습니다.
+하는겸 테스트로 이전에 배운 VAE를 만들어보며 리뷰와 실제 코드 적용을 해봤습니다.
+
+
 
 ## VAE
 variation autoencoder 의 약자로 
@@ -16,4 +17,6 @@ variation autoencoder 의 약자로
 단점: 흐리다.
 
 
-##
+
+## 테스트 환경
+데이터셋 : MNIST hand writing
