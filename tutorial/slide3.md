@@ -9,6 +9,10 @@
 하는겸 테스트로 이전에 배운 VAE를 만들어보며 리뷰와 실제 코드 적용을 해봤습니다.
 
 
+## pytotch
+
+torch의 장점
+그냥 tensor 계산식 써놓고 돌리면 알아서 어떤 변수가 어떤 계산을 거쳤는지 알아서 계산해준다!
 
 ## VAE
 variation autoencoder 의 약자로 
