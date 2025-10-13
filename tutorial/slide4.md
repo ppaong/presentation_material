@@ -69,18 +69,19 @@ torch.use_deterministic_algorithms(True)
 ## GAN같이 2개의 모델로 학습하는 경우 각각의 optimizer를 따로 만들어 줄 필요가 있다.
 
 
+
 ## spartial transformer
-invariance to translation, scale, rotation 등을 배우는 모델에 적용가능한    
-cnn중간에 translation, scale, rotation 이 적용된 이미지를 원래 이미지(똑바로 된 이미지)로 만들수있는 theta를 반환하는 어떤 신경망(일명 Localisation net)을 만드는것이 아이디어이다.    
+cnn이 sparially invariant하지 못한점을 보완하기 위해서 구성된 아이디어다.
+cnn중간에 translation, scale, rotation 이 적용된 이미지를 원래 이미지(똑바로 된 이미지)로 만들수있는 theta를 반환하는 어떤 신경망(일명 Localisation net)을 만드는것이 아이디어이다. 주의할 점은 데이터셋에 translation, scale, rotation 이 적용된 이미지를 넣어서 학습하는게 아니라, 그냥 모델에서 자동으로(MLE 방식으로) 파라메터를 조정하도록 두어야 한다. model이 더 잘 이미지를 인식할 수 있는 affine 변환을 Localisation net에게 학습시키는 것이라 볼 수 있다.
 <img width="663" height="306" alt="image" src="https://github.com/user-attachments/assets/97bc4d08-cddc-4e2a-b3aa-c9861fa705a7" />
 
-theta는 이미지(행렬)을 사영(혹은 변환)시키는 연산의 주요 변수이다.(affine function(grid))    
+theta(transformation parameters)는 이미지(행렬)을 사영(혹은 변환)시키는 연산의 주요 변수이다.(affine function)    
 <img width="714" height="305" alt="image" src="https://github.com/user-attachments/assets/8338656a-64b5-4d49-b5cf-36bc8f582621" />    
 
 이미지의 좌표 x,y가 주어졌을때 다른 새로운 좌표(똑바른) x',y'로 변환은 아래와 같아서 theta는 2*3행렬을 구하면 된다. 자세한 내용은 더 공부해봐야 한다.   
 <img width="601" height="94" alt="image" src="https://github.com/user-attachments/assets/c915b7c6-5a57-4dc9-b5eb-2bbf1e416677" />
 
-Localisation net이 그러한 theta를 반환하면 pytorch에서 제공하는 affine_gird 함수를 통해 spatial transformer를 구현할 수 있다.    
+Localisation net이 그러한 theta를 반환하도록 만들면, pytorch에서 제공하는 affine_gird 함수(각 좌표에 따른 변환을 계산해두는 grid)를 통해 spatial transformer를 구현할 수 있다.    
 
 grid = F.affine_grid(theta, x.size())    
 x = F.grid_sample(x, grid)    
