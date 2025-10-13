@@ -4,7 +4,7 @@
 
 
 
-### transfer learning을 하는법
+## transfer learning을 하는법
 1. 모델 아무거나 하나를 불러온다.
 2. 중간에 바꿀 부분의 in_features 속성을 얻는다.
 3. 임의의 Layer를 만들고, 중간을 임의의 Layer로 교체한다.
@@ -21,7 +21,7 @@ for param in model_fc.parameters():
 
 
 
-### Adversarial Example Generation
+## Adversarial Example Generation
 cnn이 잘 학습했는지 확인해보기 위해서 Fast Gradient Sign Attack이라는 것을 해볼 수 있다.
 이미지에 약간에 (육안으로는 구별도 안되는)잔상 같은걸 주면 모델이 아에 다른 class로 구분하는 문제가 발생하는것을 확인해보는 것이다.
 일종의 inference 단계에서 noise injection을 해서 accuracy가 노이즈 강도에 따라 얼마나 떨어지는지를 테스트 과정이라 볼수도 있을것 같다.
@@ -37,7 +37,7 @@ def fgsm_attack(image, eps, data_grad):
 
 
 
-### 가중치 초기값을 다음과 같이 초기화 할 수 있다.
+## 가중치 초기값을 다음과 같이 초기화 할 수 있다.
 layer 종류에 따라 각각 초기화하는 방식을 지정해줄 수 있다
 def weight_init(m):
     classname = m.__class__.__name__
@@ -51,23 +51,33 @@ net.apply(weights_init)
 
 
 
-### 아래의 parallel에서 gpu를 병렬로 사용 가능하다.
-좀 무거운 모델을 돌릴때 사용하면 좋을것 같다.
+## 아래의 parallel에서 데이터를 병렬로 처리 가능하다.
 import torch.nn.parallel
+
+device = torch.device("cuda:0" if (torch.cuda.is_available() and ngpu > 0) else "cpu")
 
 net = Net().to(device)
 net = nn.DataParallel(net, list(range(ngpu)))
 
 
 
-### 한 장치에서 나오는 결과가 항상 같은 결과를 보이게 강제할 수 있다. (deterministic)
+## 한 장치에서 나오는 결과가 항상 같은 결과를 보이게 강제할 수 있다. (deterministic)
 torch.use_deterministic_algorithms(True)
 
 
 
-### GAN같이 2개의 모델로 학습하는 경우 각각의 optimizer를 따로 만들어 줄 필요가 있다.
+## GAN같이 2개의 모델로 학습하는 경우 각각의 optimizer를 따로 만들어 줄 필요가 있다.
 
 
+## spartial transformer
+invariance to translation, scale, rotation 등을 배우는 모델에 적용가능한 
+cnn중간에 translation, scale, rotation 을 원래 이미지(똑바로 변환된)로 만들수있는 theta를 반환하는 어떤 신경망(일명 Localisation net)을 만드는것이 아이디어이다.
+theta는 이미지(행렬)을 사영(혹은 변환)시키는 연산의 주요 변수이다.(affine function(grid))
 
+<img width="714" height="305" alt="image" src="https://github.com/user-attachments/assets/8338656a-64b5-4d49-b5cf-36bc8f582621" />
+theta를 구하면 pytorch에서 제공하는 affine_gird 함수를 통해 spatial transformer를 구현할 수 있다.
+
+grid = F.affine_grid(theta, x.size())
+x = F.grid_sample(x, grid)
 
 
