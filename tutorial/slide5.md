@@ -5,15 +5,15 @@
 
 
 ## transfer learning을 하는법
-1. 모델 아무거나 하나를 불러온다.
-2. 중간에 바꿀 부분의 in_features 속성을 얻는다.
-3. 임의의 Layer를 만들고, 중간을 임의의 Layer로 교체한다.
+1. 모델 아무거나 하나 로드
+2. 중간에 바꿀 부분의 in_features 속성 추출
+3. 임의의 Layer를 만들고, 중간을 임의의 Layer로 교체
 ```py
 model_ft = models.resnet18(weights = 'IMAGENET1K_V1')   
 num_ftrs = model_ft.fc.in_features   
 model_ft.fc = nn.Linear(num_ftrs,2)   
 ```
-모델이 아에 학습 못하게 grad를 막아버리는것도 해볼 수 있다.  
+모델이 아에 학습 못하게 grad를 막아버리는 것도 해볼 수 있다.  
 ```py
 for param in model_fc.parameters():   
     param.requires_grad = False   
@@ -76,8 +76,8 @@ torch.use_deterministic_algorithms(True)
 
 
 ## spartial transformer
-cnn이 sparially invariant하지 못한점을 보완하기 위해서 구성된 아이디어다.   
-cnn중간에 translation, scale, rotation 이 적용된 이미지를 원래 이미지(똑바로 된 이미지)로 만들수있는 theta를 반환하는 어떤 신경망(일명 Localisation net)을 만드는것이 아이디어이다.    
+cnn이 sparially invariant하지 못한점을 보완하기 위해서 구성된 아이디어   
+cnn중간에 translation, scale, rotation 이 적용된 이미지를 원래 이미지(똑바로 된 이미지)로 만들수있는 theta를 반환하는 어떤 신경망(일명 Localisation net)을 만드는것이 주요 컨셉    
 주의할 점은 데이터셋에 translation, scale, rotation 이 적용된 이미지를 넣어서 학습하는게 아니라, 그냥 모델에서 자동으로(MLE) 파라메터를 조정하도록 두어야 한다.   
 model이 더 잘 이미지를 인식할 수 있는 affine 변환을 Localisation net에게 학습시키는 것이라 볼 수 있다.   
 <img width="663" height="306" alt="image" src="https://github.com/user-attachments/assets/97bc4d08-cddc-4e2a-b3aa-c9861fa705a7" />
