@@ -72,7 +72,9 @@ torch.use_deterministic_algorithms(True)
 
 ## spartial transformer
 cnn이 sparially invariant하지 못한점을 보완하기 위해서 구성된 아이디어다.
-cnn중간에 translation, scale, rotation 이 적용된 이미지를 원래 이미지(똑바로 된 이미지)로 만들수있는 theta를 반환하는 어떤 신경망(일명 Localisation net)을 만드는것이 아이디어이다. 주의할 점은 데이터셋에 translation, scale, rotation 이 적용된 이미지를 넣어서 학습하는게 아니라, 그냥 모델에서 자동으로(MLE 방식으로) 파라메터를 조정하도록 두어야 한다. model이 더 잘 이미지를 인식할 수 있는 affine 변환을 Localisation net에게 학습시키는 것이라 볼 수 있다.
+cnn중간에 translation, scale, rotation 이 적용된 이미지를 원래 이미지(똑바로 된 이미지)로 만들수있는 theta를 반환하는 어떤 신경망(일명 Localisation net)을 만드는것이 아이디어이다.    
+주의할 점은 데이터셋에 translation, scale, rotation 이 적용된 이미지를 넣어서 학습하는게 아니라, 그냥 모델에서 자동으로(MLE) 파라메터를 조정하도록 두어야 한다.   
+model이 더 잘 이미지를 인식할 수 있는 affine 변환을 Localisation net에게 학습시키는 것이라 볼 수 있다.   
 <img width="663" height="306" alt="image" src="https://github.com/user-attachments/assets/97bc4d08-cddc-4e2a-b3aa-c9861fa705a7" />
 
 theta(transformation parameters)는 이미지(행렬)을 사영(혹은 변환)시키는 연산의 주요 변수이다.(affine function)    
