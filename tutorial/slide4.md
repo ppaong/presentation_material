@@ -22,7 +22,7 @@ for param in model_fc.parameters():
 
 
 ## Adversarial Example Generation
-cnn이 잘 학습했는지 확인해보기 위해서 Fast Gradient Sign Attack이라는 것을 해볼 수 있다.   
+cnn이 잘 학습했는지 확인해보기 위해서 Fast Gradient Sign Attack이라는 것을 해볼 수 있다.    
 이미지에 약간에 (육안으로는 구별도 안되는)잔상 같은걸 주면 모델이 아에 다른 class로 구분하는 문제가 발생하는것을 확인해보는 것이다.   
 일종의 inference 단계에서 noise injection을 해서 accuracy가 노이즈 강도에 따라 얼마나 떨어지는지를 테스트 과정이라 볼수도 있을것 같다.   
 이런거 해결하려면 학습 단계부터 noise injection해서 해결보거나 데이터를 더 뻥튀기 해서 돌려보는것이 도움이 될 것이라 생각한다.   
@@ -71,7 +71,7 @@ torch.use_deterministic_algorithms(True)
 
 
 ## spartial transformer
-cnn이 sparially invariant하지 못한점을 보완하기 위해서 구성된 아이디어다.
+cnn이 sparially invariant하지 못한점을 보완하기 위해서 구성된 아이디어다.   
 cnn중간에 translation, scale, rotation 이 적용된 이미지를 원래 이미지(똑바로 된 이미지)로 만들수있는 theta를 반환하는 어떤 신경망(일명 Localisation net)을 만드는것이 아이디어이다.    
 주의할 점은 데이터셋에 translation, scale, rotation 이 적용된 이미지를 넣어서 학습하는게 아니라, 그냥 모델에서 자동으로(MLE) 파라메터를 조정하도록 두어야 한다.   
 model이 더 잘 이미지를 인식할 수 있는 affine 변환을 Localisation net에게 학습시키는 것이라 볼 수 있다.   
