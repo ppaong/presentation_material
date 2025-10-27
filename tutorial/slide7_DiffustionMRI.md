@@ -34,4 +34,11 @@ $$ R^{64 * 64} \to 0,1 $$
 L = L_MAE + \lambda * L_adversarial
 binary cross entropy 사용
 
-# 읽은 곳 까지 정리
+# 읽은 곳 까지 정리'
+
+
+# 모르는 용어
+피질,회백질,백질,섬유 대충 뇌 구조 관련
+다이스 계수
+dMRI
+DWI
