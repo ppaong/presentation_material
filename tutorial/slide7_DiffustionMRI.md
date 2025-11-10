@@ -1,8 +1,10 @@
-이번주는 듀토리얼 7장 논문읽기 파트를 진행했습니다.
-논문명은 Diffusion MRI data analysis assisted by deep learning synthesized anatomical images (DeepAnat)입니다.
-https://www.sciencedirect.com/science/article/pii/S1361841523000051
+이번주는 듀토리얼 7장 논문읽기 파트를 진행했습니다.    
+논문명은 Diffusion MRI data analysis assisted by deep learning synthesized anatomical images (DeepAnat)입니다.     
+https://www.sciencedirect.com/science/article/pii/S1361841523000051 
 
 모델 돌려보는 부분을 집중해서 공부했습니다.
+
+
 
 ### 논문 내용
 먼저 제가 이해한 논문 내용은 다음과 같습니다.
@@ -59,7 +61,18 @@ keras==2.3.1
 ### 학습 결과
 대부분 문제를 해결하고 학습을 돌려봤습니다.    
 batchsize = 1    
-epoch = 30     
+epoch = 30       
+학습 optimizer는 기본 설정대로 진행하였으며 시간은 대략 2시간 정도 걸렸습니다.    
+
+데이터는    
+mwu126426    
+mwu127226    
+mwu128026    
+mwu128632   
+mwu129937    
+mwu130417   
+총 6개를 사용해서 진행했습니다.   
+
 기본 설정대로 진행하였으며 시간은 대략 2시간 정도 걸렸습니다.    
 
 ```
