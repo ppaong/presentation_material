@@ -6,33 +6,35 @@ https://www.sciencedirect.com/science/article/pii/S1361841523000051
 
 ### 논문 내용
 먼저 제가 이해한 논문 내용은 다음과 같습니다.
-Diffuction MRI 라는게 있는데 neuroimaging, making the tissue microstructure and structural connections in the in vivo human brain하기위해 사용되는 데이터라고 합니다. 하지만 데이터를 분석하기 위해서는 추가적으로 t1w 뇌 스캔 이미지가 팔요한데 이게 정확히 측정하는게(만들어내는게) 어려운 일입니다. 환자의 작은 움직임에도 오차가 발생하고 사진 찍는 시간도 굉장히 오래걸린다고 합니다. 그래서 논문 저자는 Diffusion MRI 데이터를 가지고 t1w이미지를 합성(생성)해보자고 제안합니다. 여기서 제안하는 모델 이름이 DeepAnat 이고 구현은 tensorflow 구버전으로 구현되어있습니다. CNN을 이용해서 dMRI로 부터 T1w를 만들어냅니다.
 
-DeepAnat모델의 구조는 일단 입력으로 복셀 이미지(3차원 이미지)(DiffusionMRI 데이터)를 여러장(meanb0, meandwi, dtiL1, dtiL2, dtiL3, dtiDwi1, dtiDwi2, dtiDwi3, dtiDwi4, dtiDwi5, dtiDwi6) 받아서, 복셀 이미지를 출력하는 output을 가졌습니다.3D Unet을 사용해서 위와 같은 모델을 설계했고, 학습방식은 GAN방식으로 구현되어있습니다.
-여기서 특이사항은 generator로 사용된 Unet 모델을 3D 이고 discriminator로 사용된 모델은 2D이미지를 받는다는 점입니다.
-저자는 SRGAN을 근거로 들며, GAN학습방식을 사용할때 discriminator는 2D가 좋다고 합니다.
+Diffuction MRI 라는게 있는데 neuroimaging, making the tissue microstructure and structural connections in the in vivo human brain하기위해 사용되는 데이터라고 합니다. 하지만 데이터를 분석하기 위해서는 추가적으로 t1w 뇌 스캔 이미지가 팔요한데 이게 정확히 측정하는게(만들어내는게) 어려운 일입니다. 환자의 작은 움직임에도 오차가 발생하고 사진 찍는 시간도 굉장히 오래걸린다고 합니다. 그래서 논문 저자는 Diffusion MRI 데이터를 가지고 t1w이미지를 합성(생성)해보자고 제안합니다. 여기서 제안하는 모델 이름이 DeepAnat 이고 구현은 tensorflow 구버전으로 구현되어있습니다. CNN을 이용해서 dMRI로 부터 T1w를 만들어냅니다.     
 
-loss function은 다음과 같은 함수가 사용되었습니다.
-$ L = L_{MAE} + \lambda * L_{adversarial} $ 
-람다를 통해서 data fitting loss와 adversarial loss를 적절한 비율로 조정해서 loss를 사용했습니다.(람다는 10^-3 정도 라고 합니다.)   
+DeepAnat모델의 구조는 일단 입력으로 복셀 이미지(3차원 이미지)(DiffusionMRI 데이터)를 여러장(meanb0, meandwi, dtiL1, dtiL2, dtiL3, dtiDwi1, dtiDwi2, dtiDwi3, dtiDwi4, dtiDwi5, dtiDwi6) 받아서, 복셀 이미지를 출력하는 output을 가졌습니다.3D Unet을 사용해서 위와 같은 모델을 설계했고, 학습방식은 GAN방식으로 구현되어있습니다.     
 
-논문 내용은 여기까지이고 github에 저자가 구현해둔 DeepAnat파일을 실행시켜본 내용은 다음과 같습니다.
+여기서 특이사항은 generator로 사용된 Unet 모델을 3D 이고 discriminator로 사용된 모델은 2D이미지를 받는다는 점입니다.    
+저자는 SRGAN을 근거로 들며, GAN학습방식을 사용할때 discriminator는 2D가 좋다고 합니다.    
+
+loss function은 다음과 같은 함수가 사용되었습니다.   
+$$ L = L_{MAE} + \lambda * L_{adversarial} $$     
+람다를 통해서 data fitting loss와 adversarial loss를 적절한 비율로 조정해서 loss를 사용했습니다.(람다는 10^-3 정도 라고 합니다.)     
+
+논문 내용은 여기까지이고 github에 저자가 구현해둔 DeepAnat파일을 실행시켜본 내용은 다음과 같습니다.    
 
 
 
 ### 환경
-모델을 돌린 환경은
-원도우 11
-TITAN X (12GB)
-CUDA 10.1
-cudnn 7.5.0
+모델을 돌린 환경은    
+원도우 11     
+TITAN X (12GB)     
+CUDA 10.1       
+cudnn 7.5.0     
 
 tensorflow 구버전과 호환을 위해 낮은 버전을 깔고 환경설정을 했습니다.
 
-아나콘다를 사용해서 python 3.7버전에서
-tensorflow-gpu==2.1.0
-keras==2.3.1
-구버전과 그외 추가적인 패키지를 설치하여 환경설정을 완료했습니다.
+아나콘다를 사용해서 python 3.7버전에서     
+tensorflow-gpu==2.1.0    
+keras==2.3.1     
+구버전과 그외 추가적인 패키지를 설치하여 환경설정을 완료했습니다.     
 
 
 
@@ -50,10 +52,10 @@ keras==2.3.1
 
 
 ### 학습 결과
-대부분 문제를 해결하고 학습을 돌려봤습니다.
-batchsize = 1
-epoch = 30
-기본 설정대로 진행하였으며 시간은 대략 2시간 정도 걸렸습니다.
+대부분 문제를 해결하고 학습을 돌려봤습니다.    
+batchsize = 1    
+epoch = 30     
+기본 설정대로 진행하였으며 시간은 대략 2시간 정도 걸렸습니다.    
 
 ```
 Train on 640 samples, validate on 96 samples
@@ -141,8 +143,8 @@ Applying finished
 
 
 ### 요약
-DeepAnat 모델을 학습시키는것과 저장하는것에 성공했으나 로드를 실패했습니다.
-구버전의 tensorflow,keras를 사용할때는 numpy, h5py 등의 패키지를 삭제하고 다시 구버전으로 다시 깔아야 합니다.
+DeepAnat 모델을 학습시키는것과 저장하는것에 성공했으나 로드를 실패했습니다.    
+구버전의 tensorflow,keras를 사용할때는 numpy, h5py 등의 패키지를 삭제하고 다시 구버전으로 다시 깔아야 합니다.   
 
 
 
