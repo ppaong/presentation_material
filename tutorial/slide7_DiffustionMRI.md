@@ -2,7 +2,7 @@
 논문명은 Diffusion MRI data analysis assisted by deep learning synthesized anatomical images (DeepAnat)입니다.
 https://www.sciencedirect.com/science/article/pii/S1361841523000051
 
-내용 이해보다는 모델 돌려보는 부분을 집중해서 공부했습니다.
+모델 돌려보는 부분을 집중해서 공부했습니다.
 
 ### 논문 내용
 먼저 제가 이해한 논문 내용은 다음과 같습니다.
