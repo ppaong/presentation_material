@@ -9,10 +9,15 @@ https://www.sciencedirect.com/science/article/pii/S1361841523000051
 
 Diffuction MRI 라는 데이터가 있습니다. neuroimaging, making the tissue microstructure and structural connections in the in vivo human brain하기위해 사용되는 데이터라고 합니다. 하지만 데이터를 분석하기 위해서는 추가적으로 t1w 뇌 스캔 이미지가 팔요한데 이것을 정확히 측정하는게(만들어내는게) 어려운 일입니다. 환자의 작은 움직임에도 오차가 발생하고 사진 찍는 시간도 굉장히 오래걸린다고 합니다. 그래서 논문 저자는 Diffusion MRI 데이터를 가지고 t1w이미지를 합성(생성)해보자고 제안합니다. 여기서 제안하는 모델 이름이 DeepAnat 이고 구현은 tensorflow 구버전으로 구현되어있습니다. CNN을 이용해서 dMRI로 부터 T1w를 만들어냅니다.     
 
-DeepAnat모델의 구조는 일단 입력으로 복셀 이미지(3차원 이미지)(DiffusionMRI 데이터)를 여러장(meanb0, meandwi, dtiL1, dtiL2, dtiL3, dtiDwi1, dtiDwi2, dtiDwi3, dtiDwi4, dtiDwi5, dtiDwi6) 받아서, 복셀 이미지를 출력하는 output을 가졌습니다.3D Unet을 사용해서 위와 같은 모델을 설계했고, 학습방식은 GAN방식으로 구현되어있습니다.     
+DeepAnat모델의 구조는 일단 입력으로 복셀 이미지(3차원 이미지)(DiffusionMRI 데이터)를 여러장(meanb0, meandwi, dtiL1, dtiL2, dtiL3, dtiDwi1, dtiDwi2, dtiDwi3, dtiDwi4, dtiDwi5, dtiDwi6) 받아서, 복셀 이미지를 출력하는 output을 가졌습니다. 3D Unet을 사용해서 위와 같은 모델을 설계했습니다.
 
-여기서 특이사항은 generator로 사용된 Unet 모델을 3D 이고 discriminator로 사용된 모델은 2D이미지를 받는다는 점입니다.    
-저자는 SRGAN을 근거로 들며, GAN학습방식을 사용할때 discriminator는 2D가 좋다고 합니다.    
+입력받는 이미지는 Diffusion MRI를 적당히 변환한 11가지 이미지를 사용합니다. 각각 아래와 같습니다.   
+* meanb0 : 평균을 0으로 만든 이미지 입니다.   
+* meandwi : DWI이미지들의 평균 이미지 입니다.   
+* dtiL1, dtiL2, dtiL3 : 이미지를 고유값 분해해서 가장 큰 고유값과, 두번째로 작은 고유값, 그리고 가장 작은 고유값이 사용되었습니다.    
+* dtiDwi1, dtiDwi2, dtiDwi3, dtiDwi4, dtiDwi5, dtiDwi6 : 6개의 DWI 채널을 사용했다고 합니다. 이 부분은 잘 모르겠습니다.     
+
+학습방식은 GAN방식으로 구현되어있습니다. 여기서 특이사항은 generator로 사용된 Unet 모델을 3D 이고 discriminator로 사용된 모델은 2D이미지를 받는다는 점입니다. 저자는 SRGAN을 근거로 들며, GAN학습방식을 사용할때 discriminator는 2D가 좋다고 합니다.     
 
 loss function은 다음과 같은 함수가 사용되었습니다.   
 $$ L = L_{MAE} + \lambda * L_{adversarial} $$     
