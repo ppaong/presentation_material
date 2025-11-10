@@ -7,7 +7,7 @@ https://www.sciencedirect.com/science/article/pii/S1361841523000051
 ### 논문 내용
 먼저 제가 이해한 논문 내용은 다음과 같습니다.
 
-Diffuction MRI 라는게 있는데 neuroimaging, making the tissue microstructure and structural connections in the in vivo human brain하기위해 사용되는 데이터라고 합니다. 하지만 데이터를 분석하기 위해서는 추가적으로 t1w 뇌 스캔 이미지가 팔요한데 이게 정확히 측정하는게(만들어내는게) 어려운 일입니다. 환자의 작은 움직임에도 오차가 발생하고 사진 찍는 시간도 굉장히 오래걸린다고 합니다. 그래서 논문 저자는 Diffusion MRI 데이터를 가지고 t1w이미지를 합성(생성)해보자고 제안합니다. 여기서 제안하는 모델 이름이 DeepAnat 이고 구현은 tensorflow 구버전으로 구현되어있습니다. CNN을 이용해서 dMRI로 부터 T1w를 만들어냅니다.     
+Diffuction MRI 라는 데이터가 있습니다. neuroimaging, making the tissue microstructure and structural connections in the in vivo human brain하기위해 사용되는 데이터라고 합니다. 하지만 데이터를 분석하기 위해서는 추가적으로 t1w 뇌 스캔 이미지가 팔요한데 이것을 정확히 측정하는게(만들어내는게) 어려운 일입니다. 환자의 작은 움직임에도 오차가 발생하고 사진 찍는 시간도 굉장히 오래걸린다고 합니다. 그래서 논문 저자는 Diffusion MRI 데이터를 가지고 t1w이미지를 합성(생성)해보자고 제안합니다. 여기서 제안하는 모델 이름이 DeepAnat 이고 구현은 tensorflow 구버전으로 구현되어있습니다. CNN을 이용해서 dMRI로 부터 T1w를 만들어냅니다.     
 
 DeepAnat모델의 구조는 일단 입력으로 복셀 이미지(3차원 이미지)(DiffusionMRI 데이터)를 여러장(meanb0, meandwi, dtiL1, dtiL2, dtiL3, dtiDwi1, dtiDwi2, dtiDwi3, dtiDwi4, dtiDwi5, dtiDwi6) 받아서, 복셀 이미지를 출력하는 output을 가졌습니다.3D Unet을 사용해서 위와 같은 모델을 설계했고, 학습방식은 GAN방식으로 구현되어있습니다.     
 
