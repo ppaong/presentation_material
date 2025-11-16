@@ -1,0 +1,8 @@
+Applying...
+mwu102311
+mean squared error: 0.0015456372042010676
+mwu127226
+mean squared error: 0.0015794248234955064
+mwu128026
+mean squared error: 0.0010406949393452524
+Applying finished
