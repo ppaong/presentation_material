@@ -1,22 +1,24 @@
-#
+# training loss
 
-
-
-pretraining loss graph
+### pretraining loss graph
 ![1][pre_loss]
-data : 7()   
+
+data : 7(mwu119126, mwu120212, mwu120414, mwu121921, mwu125222, mwu126325, mwu126426)    
 batch size : 2   
 epoch : 30   
 
 
-fine tunning loss graph
+### fine tunning loss graph
 ![2][fine_loss]
-data : 3()    
+
+data : 3(mwu102311,mwu127226,mwu128026)    
 batch size : 1    
 epoch : 30   
 
 
-mwu102311(finetune 에서 사용된 data)   
+# sampling
+
+### mwu102311(finetune 에서 사용된 data)   
 mean squared error: 0.0015456372042010676   
 | |x|y|z|
 |---|---|---|---|
@@ -25,12 +27,13 @@ mean squared error: 0.0015456372042010676
 
 
 
-mwu165032(학습에 사용된 적 없는 data)   
+### mwu165032(학습에 사용된 적 없는 data)   
 mean squared error: 0.0026827968446687025    
 | |x|y|z|
 |---|---|---|---|
 |predict|![x][val_x_p]|![y][val_y_p]|![z][val_z_p]|
 |target|![x][val_x_t]|![y][val_y_t]|![z][val_z_t]|
+
 
 
 
