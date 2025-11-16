@@ -16,10 +16,30 @@ batch size : 1
 epoch : 30   
 
 
+
+# applying
+
+### fine tunning data
+mwu102311
+mean squared error: 0.0015456372042010676
+mwu127226
+mean squared error: 0.0015794248234955064
+mwu128026
+mean squared error: 0.0010406949393452524
+
+### validation data
+Applying...
+mwu165032
+mean squared error: 0.002560754671256886
+mwu168240
+mean squared error: 0.0027351746728604175
+Applying finished
+
+
+
 # sampling
 
-### mwu102311(finetune 에서 사용된 data)   
-mean squared error: 0.0015456372042010676   
+### mwu102311(fine tunning data)      
 | |x|y|z|
 |---|---|---|---|
 |predict|![x][ex_x_p]|![y][ex_y_p]|![z][ex_z_p]|
@@ -27,8 +47,7 @@ mean squared error: 0.0015456372042010676
 
 
 
-### mwu165032(학습에 사용된 적 없는 data)   
-mean squared error: 0.0026827968446687025    
+### mwu165032(validation data)   
 | |x|y|z|
 |---|---|---|---|
 |predict|![x][val_x_p]|![y][val_y_p]|![z][val_z_p]|
