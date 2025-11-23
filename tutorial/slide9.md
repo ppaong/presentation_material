@@ -128,8 +128,31 @@ def evaluate(rnn, testing_data, classes):
 
 # 실습 결과
 
+
 # 추가
 듀토리얼 하단부에 "더 크고 더 나은 모양의 네트워크로 더 나은 결과를 얻으십시오. nn.LSTM 과 nn.GRU 계층을 추가해 보십시오." 라는 항목이 있어서 loss 차이가 어느정도 나는지 시각화 해보았습니다.
+
+5 (19%): 	 average batch loss = 0.8849768910313562
+10 (37%): 	 average batch loss = 0.7004306545779497
+15 (56%): 	 average batch loss = 0.5925594912685708
+20 (74%): 	 average batch loss = 0.5027676771388983
+25 (93%): 	 average batch loss = 0.43733921229253275
+training took 455.4566979408264s
+
+5 (19%): 	 average batch loss = 0.9075006909043614
+10 (37%): 	 average batch loss = 0.6758852597104117
+15 (56%): 	 average batch loss = 0.5340729240817167
+20 (74%): 	 average batch loss = 0.4268743558580507
+25 (93%): 	 average batch loss = 0.33863356040780984
+training took 555.4782145023346s
+
+5 (19%): 	 average batch loss = 0.8458056246186352
+10 (37%): 	 average batch loss = 0.6054013165695394
+15 (56%): 	 average batch loss = 0.4624011240955582
+20 (74%): 	 average batch loss = 0.34388830405075543
+25 (93%): 	 average batch loss = 0.24149685792556003
+training took 510.2783668041229s
+
 
 
 
