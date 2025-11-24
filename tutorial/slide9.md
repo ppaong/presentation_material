@@ -47,6 +47,28 @@ def lineToTensor(line): #문자 단위로 BoW 표현하는 예시 코드. 글자
 ```
 먼저 전처리 하는 메소드 부터 만들고 다음에 Dataset을 클래스를 만들어서 데이터를 다루면 편리하다. 구현은 기초부터 해야한다.
 
+### 모델
+예제에서는 한 글자씩 one-hot인코딩 해서 token으로 만들고 문장을 글자 단위의 sequence로 처리한다.
+
+pytorch에서 지원하는 rnn 모델 계열은 sequence를 처리할때 간편하다.
+```py
+class CharRNN(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(CharRNN, self).__init__()
+
+        self.rnn = nn.RNN(input_size, hidden_size) #정의
+        self.h2o = nn.Linear(hidden_size, output_size)
+        self.softmax = nn.LogSoftmax(dim=1)
+
+    def forward(self, line_tensor):
+        rnn_out, hidden = self.rnn(line_tensor)
+        #sequence를 처음부터 순차적으로 하나씩 for문 돌려가며 hidden state얻어내고 할 필요가 없다.
+        #그냥 sequence 통으로 집어넣어도 된다.
+        output = self.h2o(hidden[0])
+        output = self.softmax(output)
+
+        return output
+```
 
 ### 학습및 샘플링
 전반적인 train 함수의 구현은 다음과 같이 한다.
