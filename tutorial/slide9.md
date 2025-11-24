@@ -182,6 +182,22 @@ training took 510.2783668041229s
 ![5][lstm]
 ![6][gru]
 
+추가로 lstm은 반환형태가 hidden state랑 cell state 같이 튜플로 나온다.
+```py
+class CharLSTM(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(CharLSTM, self).__init__()
+        self.rnn = nn.LSTM(input_size, hidden_size)
+        self.h2o = nn.Linear(hidden_size, output_size)
+        self.softmax = nn.LogSoftmax(dim=1)
+
+    def forward(self, line_tensor):
+        rnn_out, (hidden, _) = self.rnn(line_tensor)
+        output = self.h2o(hidden[0])
+        output = self.softmax(output)
+
+        return output
+```
 
 
 [rnn_loss]: ./rnn_loss.png
