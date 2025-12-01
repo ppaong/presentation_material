@@ -26,7 +26,7 @@ decoder에서는 encoder에서 받아온 hidden state로 부터 재귀적인 방
 
 
 문장이나 단어를 seq로 전처리 할때 끝 부분에 <END> 토큰을 추가해서 하거나 혹은 모델 자체에서 처리하도록 만들 수 있습니다.    
-pytorch 예제의 경우 토크나이징은 전부 one-hot으로 처리했으나, embedding 모델도 처리할 수 있습니다.   
+pytorch 예제의 경우 토크나이징은 전부 one-hot으로 처리했습니다.
 
 ---
 
