@@ -2,7 +2,7 @@
 tutorial 8. PyTorch - DL for NLP -> 완료    
 기초부터 시작하는 NLP: 문자-단위 RNN으로 이름 분류하기 - 완료    
 기초부터 시작하는 NLP: 문자-단위 RNN으로 이름 생성하기 - 완료    
-기초부터 시작하는 NLP: Sequence to Sequence 네트워크와 Attention을 이용한 번역 - 완료
+기초부터 시작하는 NLP: Sequence to Sequence 네트워크와 Attention을 이용한 번역 - 진행중
 
 예제의 seq2seq 모델에 대해서 정리를 하는것이 좋을것 같아서 관련 내용을 정리했습니다.   
 
@@ -33,14 +33,13 @@ pytorch 예제의 경우 토크나이징은 전부 one-hot으로 처리했으나
 ![img](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FVGRNm%2FbtqDCb3D0Wn%2FAAAAAAAAAAAAAAAAAAAAAA3rr3vlfQsoQfu3vBTDUguO6E87r0xnZp7IaUHF8hx1%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1767193199%26allow_ip%3D%26allow_referer%3D%26signature%3DKV2Tg9LGvwas2odbDQKO56NLkSg%253D)
 디코더에서 문장 시작과 끝의 토큰을 <EOS>   
 decoder가 올바른 원래문장을 생성하기 위해서는 모든 시점에서 이전단계의 결과물이    
-이런 방식으로 decoder가 학습하는 방식을 teacher forcing 이라 부른다.   
+이런 방식으로 decoder가 학습하는 방식을 teacher forcing 이라 부릅니다.   
 
 
 
 ### 한계점  
 너무 긴 문장은 잘 처리하지 못합니다. (RNN의 고질적 문제점)     
 단점으로는 순차적으로 계산하며 hidden state를 넘겨야해서 병렬처리가 안 되는 이유로 학습이 매우 느립니다.   
-###### 이제는 transformer에게 밀려버린 범부여..
 
 
 
@@ -57,5 +56,71 @@ hidden state 하나에 문장을 거쳐오며 모든 정보를 다 압축시키�
 ![img](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FcNcsQd%2Fbtrl4RHOz6b%2FAAAAAAAAAAAAAAAAAAAAALr-3q2Mz3WMQRXvchyA2J6Fg6JfLw_mzY2RFMuSxvkl%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1767193199%26allow_ip%3D%26allow_referer%3D%26signature%3DDHZn77fhab%252BdsBvOeXWyjvZWABc%253D)
 
 
+```py
+class BahdanauAttention(nn.Module):
+    def __init__(self, hidden_size):
+        super(BahdanauAttention, self).__init__()
+        self.Wa = nn.Linear(hidden_size, hidden_size)#Q
+        self.Ua = nn.Linear(hidden_size, hidden_size)#K
+        self.Va = nn.Linear(hidden_size, 1)#
 
+    def forward(self, query, keys):
+        scores = self.Va(torch.tanh(self.Wa(query) + self.Ua(keys)))
+        scores = scores.squeeze(2).unsqueeze(1)
+
+        weights = F.softmax(scores, dim=-1)
+        context = torch.bmm(weights, keys)
+
+        return context, weights
+
+class AttnDecoderRNN(nn.Module):
+    def __init__(self, hidden_size, output_size, dropout_p=0.1):
+        super(AttnDecoderRNN, self).__init__()
+        self.embedding = nn.Embedding(output_size, hidden_size)
+        self.attention = BahdanauAttention(hidden_size)
+        self.gru = nn.GRU(2 * hidden_size, hidden_size, batch_first=True)
+        self.out = nn.Linear(hidden_size, output_size)
+        self.dropout = nn.Dropout(dropout_p)
+
+    def forward(self, encoder_outputs, encoder_hidden, target_tensor=None):
+        batch_size = encoder_outputs.size(0)
+        decoder_input = torch.empty(batch_size, 1, dtype=torch.long, device=device).fill_(SOS_token)
+        decoder_hidden = encoder_hidden
+        decoder_outputs = []
+        attentions = []
+
+        for i in range(MAX_LENGTH):
+            decoder_output, decoder_hidden, attn_weights = self.forward_step(
+                decoder_input, decoder_hidden, encoder_outputs
+            )
+            decoder_outputs.append(decoder_output)
+            attentions.append(attn_weights)
+
+            if target_tensor is not None:
+                # Teacher forcing 포함: 목표를 다음 입력으로 전달
+                decoder_input = target_tensor[:, i].unsqueeze(1) # Teacher forcing
+            else:
+                # Teacher forcing 미포함: 자신의 예측을 다음 입력으로 사용
+                _, topi = decoder_output.topk(1)
+                decoder_input = topi.squeeze(-1).detach()  # 입력으로 사용할 부분을 히스토리에서 분리
+
+        decoder_outputs = torch.cat(decoder_outputs, dim=1)
+        decoder_outputs = F.log_softmax(decoder_outputs, dim=-1)
+        attentions = torch.cat(attentions, dim=1)
+
+        return decoder_outputs, decoder_hidden, attentions
+
+
+    def forward_step(self, input, hidden, encoder_outputs):
+        embedded =  self.dropout(self.embedding(input))
+
+        query = hidden.permute(1, 0, 2)
+        context, attn_weights = self.attention(query, encoder_outputs)
+        input_gru = torch.cat((embedded, context), dim=2)
+
+        output, hidden = self.gru(input_gru, hidden)
+        output = self.out(output)
+
+        return output, hidden, attn_weights
+```
 
